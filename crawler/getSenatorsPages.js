@@ -21,13 +21,13 @@ const getSenatorsPages = () => {
 							url,
 							name: links[key].children[0].data
 						};
-						senators.push(senator)
+						senators.push(senator);
 					}
 				} catch (e) {
 					if (e instanceof TypeError) {
-						console.log('no valid href')
+						console.log('no valid href');
 					} else {
-						reject(e)
+						reject(e);
 					}
 				}
 			});

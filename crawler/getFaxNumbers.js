@@ -16,18 +16,12 @@ const getFaxNumbers = senator => {
 
 			let re = /fax.*(\d{3})\)?\s*-?(\d{3})\s*-?(\d{4})/gi;
 
-			let matches = re.exec(bodyText); // matches is an array;
-			console.log('GOT DEES MATCHES', matches);
+			let match = re.exec(bodyText);
 
-
-			if (matches && matches.length) {
-				matches = matches.slice(0, matches.length); // remove input, which is last index
-				let p = 1;
-				while (p < matches.length) { // account for multiple matches
-					let num = `${matches[p]}${matches[p+1]}${matches[p+2]}`;
-					faxNumbers.push(+num);
-					p += 3;
-				}
+			while (match) {
+				let num = +`${match[1]}${match[2]}${match[3]}`;
+				faxNumbers.push(num);
+				match = re.exec(bodyText);
 			}
 
 			senator.faxNumbers = faxNumbers; // attach fax nums to senator
