@@ -1,53 +1,21 @@
 const app = require('express')();
 const bodyParser = require('body-parser');
 const volleyball = require('volleyball');
-const Phaxio = require('phaxio');
-const keys = require('./keys');
-const phaxio = new Phaxio(keys.key, keys.secret);
-
-
+const api = require('./api');
 const PORT = 8000;
-const MitchMcConnell = '12022242499';
 
-/*------------------SEND FAX UTILITY--------------------*/
 
-const sendFaxPromise = opt => {
-	return new Promise((resolve, reject) => {
-		phaxio.sendFax(opt, (err, data) => {
-			if (err) reject(err);
-			resolve(data);
-		});
-	});
-};
-
-/*------------------LOGGING AND PARSING MIDDLEWARE--------------------*/
+/*---------------LOGGING AND PARSING MIDDLEWARE-----------------*/
 
 app.use(volleyball);
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+/*---------------API-----------------*/
 
-app.post('/', (req, res, next) => {
+app.use('/api', api);
 
-	let faxBody = req.body;
-
-	console.log('faxBody is', faxBody);
-
-	const newFax = {
-		to: MitchMcConnell,
-		string_data: faxBody
-	}
-
-	sendFaxPromise(newFax)
-		.then(data => {
-			console.log('Fax away!', data);
-			res.json(data);
-		})
-		.catch(next);
-
-});
-
-
+/*---------------ERROR HANDLING-----------------*/
 
 app.use((req, res, next) => {
 	let err = new Error('Route not found');
@@ -57,12 +25,10 @@ app.use((req, res, next) => {
 
 
 app.use((err, req, res, next) => {
-	console.log('we has an error', err);
-	res.status = err.status || 500;
-	res.json(err);
+	res.status(err.status || 500).json(err);
 });
 
-
+/*---------------START SERVER-----------------*/
 app.listen(PORT, () => {
 	console.log(`Gonna send dem faxes when you hit ${PORT}`);
 });

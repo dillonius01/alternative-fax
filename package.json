@@ -1,11 +1,12 @@
 {
   "name": "alternativeFax",
   "version": "1.0.0",
-  "description": "",
+  "description": "Snapchat for faxing and political expression",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server",
+    "start-dev": "nodemon server",
     "crawl": "node crawler"
   },
   "keywords": [],
@@ -15,6 +16,7 @@
     "body-parser": "^1.16.1",
     "cheerio": "^0.22.0",
     "express": "^4.14.1",
+    "nodemon": "^1.11.0",
     "phaxio": "^0.1.0",
     "request": "^2.79.0",
     "volleyball": "^1.4.1"
