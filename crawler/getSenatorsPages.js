@@ -2,11 +2,10 @@ const request = require('request');
 const cheerio = require('cheerio');
 const utils = require('./utils');
 
-const rootSenatorPage = 'https://www.senate.gov/senators/contact/';
+module.exports = page => {
 
-const getSenatorsPages = () => {
 	return new Promise((resolve, reject) => {
-		request(rootSenatorPage, (err, response, body) => {
+		request(page, (err, response, body) => {
 			utils.sanityCheck(err, response, body);
 
 			const $ = cheerio.load(body);
@@ -32,5 +31,3 @@ const getSenatorsPages = () => {
 		});
 	});
 };
-
-module.exports = getSenatorsPages;

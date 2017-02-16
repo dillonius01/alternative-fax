@@ -3,7 +3,7 @@ const cheerio = require('cheerio');
 const utils = require('./utils');
 
 
-const getFaxNumbers = senator => {
+module.exports = senator => {
 
 	return new Promise((resolve, reject) => {
 		request(senator.url, (err, response, body) => {
@@ -30,6 +30,4 @@ const getFaxNumbers = senator => {
 		});
 	});
 };
-
-module.exports = getFaxNumbers;
 
