@@ -6,5 +6,4 @@ module.exports = {
 			console.log(`Responded with status ${response.statusCode}`);
 		}
 	}
-
 };

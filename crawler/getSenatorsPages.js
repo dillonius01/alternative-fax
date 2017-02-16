@@ -24,11 +24,8 @@ const getSenatorsPages = () => {
 						senators.push(senator);
 					}
 				} catch (e) {
-					if (e instanceof TypeError) {
-						console.log('no valid href');
-					} else {
-						reject(e);
-					}
+					if (e instanceof TypeError) return;
+					else console.error(e);
 				}
 			});
 			resolve(senators);

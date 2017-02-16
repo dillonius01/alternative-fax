@@ -3,19 +3,16 @@ const getFaxNumbers = require('./getFaxNumbers');
 
 
 getSenatorsPages()
-.then(sens => {
-	return Promise.all(sens.map(getFaxNumbers));
-})
-.then(sensWithFaxes => {
+	.then(rawSenators => {
+		console.log('Found all links to senator pages...')
+		return Promise.all(rawSenators.map(getFaxNumbers));
+	})
+	.then(allSenators => {
+		return allSenators.filter(sen => sen.faxNumbers && sen.faxNumbers.length);
+	})
+	.then(senatorsWithFaxes => {
+		console.log(`CHECK OUT THESE SENS:\n ${senatorsWithFaxes}`);
+		console.log(`Found ${senatorsWithFaxes.length} senators with fax numbers.`);
 
-	let count = 0;
-
-	sensWithFaxes.forEach(sen => {
-		if (sen.faxNumbers && sen.faxNumbers.length) {
-			count++;
-		}
-	});
-
-	console.log(`Found ${count} senators with fax numbers`);
-})
-.catch(console.error);
+	})
+	.catch(console.error);
