@@ -9,6 +9,7 @@ const phaxio = new Phaxio(keys.key, keys.secret);
 const PORT = 8000;
 const MitchMcConnell = '12022242499';
 
+/*------------------SEND FAX UTILITY--------------------*/
 
 const sendFaxPromise = opt => {
 	return new Promise((resolve, reject) => {

@@ -6,7 +6,7 @@ module.exports = page => {
 
 	return new Promise((resolve, reject) => {
 		request(page, (err, response, body) => {
-			utils.sanityCheck(err, response, body);
+			utils.sanityCheck(err, response, reject);
 
 			const $ = cheerio.load(body);
 			const links = $('a');
