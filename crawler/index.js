@@ -2,15 +2,19 @@ const getSenatorsPages = require('./getSenatorsPages');
 const getFaxNumbers = require('./getFaxNumbers');
 
 
-getSenatorsPages()
-.then(sens => {
-	console.log(sens);
-	return sens;
-})
-.then(sens => {
-	getFaxNumbers(sens[0]);
-})
-.then(faxes => {
-	console.log('FINALLY got this', faxes);
-})
-.catch(console.error);
+let billCassidy = {
+	name: 'Bill Cassidy',
+	url: 'http://www.cassidy.senate.gov/'
+}
+
+getFaxNumbers(billCassidy)
+.then(val => console.log('loogit dis!', val))
+
+// getSenatorsPages()
+// .then(sens => {
+// 	return Promise.all(sens.map(getFaxNumbers));
+// })
+// .then(faxes => {
+// 	console.log('FINALLY got this', faxes);
+// })
+// .catch(console.error);
